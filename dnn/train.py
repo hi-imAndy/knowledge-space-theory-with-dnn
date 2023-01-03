@@ -1,29 +1,10 @@
-import tensorflow as tf
-
 import matplotlib.pyplot as plt
 from data.data_loader import load_dataset
+import numpy as np
+
+from dnn.model import setup_models
 
 class_names = ['ellipse', 'square', 'triangle']
-
-
-def setup_model():
-    model = tf.keras.Sequential([
-        tf.keras.layers.Rescaling(1. / 255),
-        tf.keras.layers.Conv2D(32, 3, activation='relu'),
-        tf.keras.layers.MaxPooling2D(),
-        tf.keras.layers.Conv2D(32, 3, activation='relu'),
-        tf.keras.layers.MaxPooling2D(),
-        tf.keras.layers.Conv2D(32, 3, activation='relu'),
-        tf.keras.layers.MaxPooling2D(),
-        tf.keras.layers.Flatten(),
-        tf.keras.layers.Dense(128, activation='relu'),
-        tf.keras.layers.Dense(3)
-    ])
-
-    model.compile(optimizer='adam',
-                  loss=tf.keras.losses.SparseCategoricalCrossentropy(from_logits=True),
-                  metrics=['accuracy'])
-    return model
 
 
 def plot_history(history):
@@ -35,10 +16,13 @@ def plot_history(history):
     plt.legend(loc='lower right')
 
 
-def train_model():
-    model = setup_model()
+def train_models():
+    models = setup_models()
     train_ds, val_ds = load_dataset()
-    history = model.fit(train_ds, epochs=100, validation_data=val_ds)
-    plot_history(history)
-    return model, history
+    for model in models:
+        history = model.fit(train_ds, epochs=10, validation_data=val_ds)
+        predictions = model.predict(val_ds)
+        predicted_classes = np.argmax(predictions, axis=1)
+        plot_history(history)
+        model.summary()
 

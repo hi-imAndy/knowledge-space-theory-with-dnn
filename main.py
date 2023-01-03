@@ -1,4 +1,4 @@
-from dnn.train import train_model
+from dnn.train import train_models
 
 if __name__ == "__main__":
-    train_model()
+    train_models()
