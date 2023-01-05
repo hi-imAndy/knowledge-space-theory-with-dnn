@@ -9,7 +9,7 @@ BATCH_SIZE = 100
 
 def load_dataset():
     train, val = None, None
-    for level in all_levels:
+    for level in images_levels:
         train_ds = image_dataset_from_directory(
             validation_split=0.2, subset="training", seed=123,
             directory=base_url + '/' + level, labels='inferred', batch_size=BATCH_SIZE,
