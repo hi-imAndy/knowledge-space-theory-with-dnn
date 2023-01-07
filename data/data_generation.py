@@ -454,7 +454,7 @@ def main():
     # cv2.destroyAllWindows()
     # generate_dataset(DATASET_SIZE, DATASET_BASE_DIR)
     for i in range(1, 5):
-        generate_by_difficulty(2000, "../../generated_images/dataset/", i)
+        generate_by_difficulty(5, "../../generated_images/dataset/", i)
     # train, test = load_dataset(DATASET_BASE_DIR)
 
 
