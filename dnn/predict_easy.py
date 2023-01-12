@@ -25,7 +25,7 @@ def get_val_index_for_each_class(ds):
     indexes = []
     for _, labels in ds.take(1):
         labels = labels.numpy().tolist()
-        for i in range(0, 12):
+        for i in range(0, 3):
             indexes.append(labels.index(i))
     return indexes
 
@@ -45,17 +45,8 @@ def load_models():
 def convert_to_kst_dict(results: dict):
     kst_results = {
         'ellipse': [],
-        'ellipse_curved': [],
-        'ellipse_hard': [],
-        'ellipse_line': [],
         'square': [],
-        'square_curved': [],
-        'square_hard': [],
-        'square_line': [],
-        'triangle': [],
-        'triangle_curved': [],
-        'triangle_hard': [],
-        'triangle_line': []
+        'triangle': []
     }
     for res in results.values():
         for i, key in enumerate(kst_results.keys()):

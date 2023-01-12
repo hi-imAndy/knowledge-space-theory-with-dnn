@@ -18,8 +18,8 @@ def train_models():
     train_ds, val_ds = load_dataset()
     model_path = get_models_path()
     for model_idx, model in enumerate(models):
-        model.fit(train_ds, epochs=20, validation_data=val_ds)
-        model.save(f'{model_path}model{model_idx}', save_format='h5')
+        model.fit(train_ds, epochs=32, validation_data=val_ds)
+        model.save(f'{model_path}model{model_idx + 140}', save_format='h5')
 
 
 if __name__ == "__main__":
